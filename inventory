@@ -1,0 +1,2 @@
+[aws]
+centos1 ansible_host=15.237.58.190 ansible_ssh_private_key_file=/home/ec2-user/code/target.pem ansible_ssh_user=ec2-user

@@ -52,7 +52,14 @@
 
     - name: Install docker-compose
       remote_user: ec2-user
-      shell: 'curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose'
+      get_url:
+        url: https://github.com/docker/compose/releases/download/1.27.4/docker-compose-Linux-x86_64
+        dest: /usr/local/bin/docker-compose
 
-    - name: Grand Permission to  DC
-      shell: chmod +x /usr/local/bin/docker-compose
+    - file:
+        path: /usr/local/bin/docker-compose
+        owner: ec2-user
+        group: ec2-user
+        mode: 'u=u+x,g=g+x'
+      
+

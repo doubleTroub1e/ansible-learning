@@ -54,12 +54,23 @@
       remote_user: ec2-user
       get_url:
         url: https://github.com/docker/compose/releases/download/1.27.4/docker-compose-Linux-x86_64
-        dest: /usr/local/bin/docker-compose
+        dest: /usr/bin/docker-compose
 
     - file:
-        path: /usr/local/bin/docker-compose
+        path: /usr/bin/docker-compose
         owner: ec2-user
         group: ec2-user
         mode: 'u=u+x,g=g+x'
       
+    - name: Clone a git repo with voteapp
+      git:
+        repo: https://github.com/dockersamples/example-voting-app.git
+        dest: /home/ec2-user/voteapp
 
+
+# Will run docker-compose up -d below:
+
+    - name: Run `docker-compose up` again
+      shell:
+        cmd: 'docker-compose -f docker-compose.yml up -d'
+        chdir: /home/ec2-user/voteapp
